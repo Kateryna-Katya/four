@@ -1,4 +1,3 @@
-/* --- GLOBAL STYLES & VARIABLES --- */
 :root {
     --black: #000000;
     --dark-gray: #0a0a0a;
@@ -7,7 +6,12 @@
     --text-main: #ffffff;
     --text-muted: #888888;
     --accent: #ffffff;
+    /* Белый на черном — самый сильный контраст */
+    --border: rgba(255, 255, 255, 0.1);
     --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+
+    /* Добавляем мягкое свечение для акцентов */
+    --glow: 0 0 20px rgba(255, 255, 255, 0.1);
 }
 
 * {
@@ -1442,4 +1446,98 @@ section {
         text-align: center;
         padding: 30px 20px;
     }
+}
+.hero {
+    background-color: var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Эффект легкого градиентного пятна на фоне, чтобы экран не был "мертвым" */
+#hero-canvas::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60vw;
+    height: 60vh;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.hero__title {
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    /* Адаптивный огромный заголовок */
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    margin: 24px 0;
+}
+
+.hero__text {
+    max-width: 500px;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+/* Кнопки */
+.btn--primary {
+    background: var(--accent);
+    /* Ослепительно белый */
+    color: var(--black);
+    padding: 18px 36px;
+    font-weight: 600;
+    border-radius: 0;
+    /* Прямые углы добавляют строгости */
+    transition: var(--transition);
+}
+
+.btn--primary:hover {
+    background: #e0e0e0;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+}
+
+.btn--outline {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--white);
+    padding: 18px 36px;
+    border-radius: 0;
+}
+
+.btn--outline:hover {
+    border-color: var(--white);
+    background: rgba(255, 255, 255, 0.05);
+}
+.strategy__grid {
+    border: 1px solid var(--border);
+    /* Вся сетка обведена тонкой линией */
+}
+
+.strategy__item {
+    border: 1px solid var(--border);
+    cursor: default;
+}
+
+/* Эффект при наведении — мягкое подсвечивание или инверсия */
+.strategy__item:hover {
+    background: var(--light-gray) !important;
+}
+
+.strategy__item:hover .strategy__number {
+    color: var(--accent) !important;
+}
+
+.strategy__item:hover .strategy__text {
+    color: var(--text-main) !important;
+}
+
+.strategy__name {
+    font-size: 1.2rem;
+    font-weight: 500;
 }
